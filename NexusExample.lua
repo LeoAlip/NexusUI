@@ -20,7 +20,7 @@ local NexusUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/LeoAl
 -- ─────────────────────────────────────────────────────────
 local Window = NexusUI:CreateWindow({
 	Name = "Your Title",
-	Version = "v1.0",
+	Version = "1.0",
 	Author = "Player",
 	Size = UDim2.new(0, 550, 0, 425),
 })
@@ -44,7 +44,7 @@ local InfoSection = MainTab:CreateSection({ Name = "INFO" })
 
 Window:AddProfile({
     Section = ProfileSection,
-    Username = "Leo_102345",
+    Username = "WirtulP",
     Image = true,
 })
 
@@ -78,7 +78,7 @@ local Slider = MainSection:CreateSlider({
 	Max = 10,
 	Default = 1,
 	Decimals = 1,
-	Suffix = "x",
+	Suffix = "",
 	Callback = function(value)
 		print("Slider:", value)
 	end,
@@ -86,8 +86,8 @@ local Slider = MainSection:CreateSlider({
 
 -- TextBox
 local Textbox = OtherSection:CreateTextBox({
-	Name = "Display Name",
-	Placeholder = "Enter a new display name...",
+	Name = "Textbox",
+	Placeholder = "Send message",
 	Default = "",
 	Callback = function(text)
 		print("Text:", text)
@@ -106,7 +106,7 @@ local Dropdown = OtherSection:CreateDropdown({
 })
 
 -- MultiDropdown (multiple selections, Name + Description supported)
-local infoMulti = OtherSection:CreateMultiDropdown({
+local MultiDropdown = OtherSection:CreateMultiDropdown({
 	Name = "MultiDropdown",
 	Description = "Can multi select",
 	Options = { "One", "Two", "Three", "Four"},
