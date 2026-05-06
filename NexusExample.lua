@@ -23,6 +23,12 @@ local Window = NexusUI:CreateWindow({
 	Version = "1.0",
 	Author = "Player",
 	Size = UDim2.new(0, 550, 0, 425),
+	KeySystem = true,
+})
+
+local KeySystem = Window:CreateKeySystem({
+	Key = "ABC123",
+	Link = "https://roblox.com",
 })
 
 -- ─────────────────────────────────────────────────────────
