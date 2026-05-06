@@ -156,6 +156,15 @@ local ColorPicker = InteresSection:CreateColorPicker({
 	end,
 })
 
+local MinimizeKeybind = InteresSection:CreateKeybind({
+	Name = "Minimize Key",
+	Description = "Toggle UI visibility",
+	Default = Enum.KeyCode.LeftControl,
+	Callback = function(key)
+		Window:SetMinimizeKey(key)
+	end,
+})
+
 AboutSection:CreateLabel({
 	Name = "NexusUI v1.0",
 	Description = "Made with ❤ — Fast, clean, and easy to use.",
