@@ -9,7 +9,7 @@
 --  STEP 1: Load the library
 --  If you're using it as a ModuleScript in your game:
 -- ─────────────────────────────────────────────────────────
-local NexusUI = require(game.ReplicatedStorage.NexusUI)
+local NexusUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/LeoAlip/NexusUI/refs/heads/main/NexusUI.lua"))()
 
 -- ───────────────────────────────────────────────────────────────────
 --  STEP 2: Create a Window (TopFrame)
