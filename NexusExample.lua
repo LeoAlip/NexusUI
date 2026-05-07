@@ -9,37 +9,42 @@
 --  STEP 1: Load the library
 --  If you're using it as a ModuleScript in your game:
 -- ─────────────────────────────────────────────────────────
-local NexusUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/LeoAlip/NexusUI/refs/heads/main/NexusUI.lua"))()
+local NexusUI = require(game.ReplicatedStorage.NexusUI)
 
--- ─────────────────────────────────────────────────────────
+-- ───────────────────────────────────────────────────────────────────
 --  STEP 2: Create a Window (TopFrame)
---  Name     = Title shown in the top bar
---  Version  = Version tag shown next to the title
---  Author   = "By who" shown next to the version
---  Size     = UDim2 size of the window (optional, has a default)
--- ─────────────────────────────────────────────────────────
+--  Name      = Title shown in the top bar
+--  Version   = Version tag shown next to the title
+--  Author    = "By who" shown next to the version
+--  Size      = UDim2 size of the window (optional, has a default)
+--  KeySystem = Choose key to minimize UI
+-- ───────────────────────────────────────────────────────────────────
 local Window = NexusUI:CreateWindow({
 	Name = "Your Title",
 	Version = "1.0",
 	Author = "Player",
 	Size = UDim2.new(0, 550, 0, 425),
-	KeySystem = true,
-})
-
-local KeySystem = Window:CreateKeySystem({
-	Key = "ABC123",
-	Link = "https://roblox.com",
+	KeySystem = false,
+	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
 -- ─────────────────────────────────────────────────────────
---  STEP 3: Create Tabs (sidebar navigation)
+--  STEP 3: Create a Key System (OPTIONAL)
+--  Key  = Choose a valid key
+--  Link = Copy link to clipboard
+-- ─────────────────────────────────────────────────────────
+
+--local KeySystem = Window:CreateKeySystem({ Key = "ABC123", Link = "https://roblox.com" })
+
+-- ─────────────────────────────────────────────────────────
+--  STEP 4: Create Tabs (sidebar navigation)
 --  Icon = optional emoji / symbol for the tab button
 -- ─────────────────────────────────────────────────────────
 local MainTab = Window:CreateTab({ Name = "Main",    Icon = "🛡️" })
 local SettingsTab = Window:CreateTab({ Name = "Misc",    Icon = "⚙" })
 
 -- ─────────────────────────────────────────────────────────
---  STEP 4: Add Sections inside each Tab
+--  STEP 5: Add Sections inside each Tab
 -- ─────────────────────────────────────────────────────────
 
 -- ── MAIN TAB ────────────────────────────────────────────
@@ -47,12 +52,30 @@ local ProfileSection = MainTab:CreateSection({ Name = "Profile" })
 local MainSection = MainTab:CreateSection({ Name = "Main" })
 local OtherSection = MainTab:CreateSection({ Name = "Other" })
 local InfoSection = MainTab:CreateSection({ Name = "INFO" })
+local InteresSection = SettingsTab:CreateSection({ Name = "Interesting" })
+local AboutSection = SettingsTab:CreateSection({ Name = "ABOUT" })
+
+-- ─────────────────────────────────────────────────────────
+--  STEP 6: Add Profile (OPTIONAL)
+--  Section  = Choose what section to put it
+--  Username = Choose username to show an information
+--  Image	 = true/false if you want the avatar to show
+-- ─────────────────────────────────────────────────────────
 
 Window:AddProfile({
-    Section = ProfileSection,
-    Username = "WirtulP",
-    Image = true,
+	Section = ProfileSection,
+	Username = "WirtulP",
+	Image = true,
 })
+
+-- ────────────────────────────────────────────────────────────────────────────────────────
+--  STEP 7: Create Elements (Important)
+--  Section  = Choose what section to put it
+--  Create   = Toggle/Dropdown/MultiDropdown/Button/Slider/Label/Textbox/ColorPicker
+--  Name	 = Name the elements
+--  Desc	 = Description of elements(Available some of it)
+--  Callback = A function for the elements
+-- ────────────────────────────────────────────────────────────────────────────────────────
 
 -- Button (Name + Description supported)
 MainSection:CreateButton({
@@ -72,10 +95,6 @@ local Toggle = MainSection:CreateToggle({
 		print("Toggle:", value)
 	end,
 })
-
--- You can also control it programmatically:
--- Toggle:Set(true)   → turn on
--- Toggle:Get()       → returns true/false
 
 -- Slider
 local Slider = MainSection:CreateSlider({
@@ -134,8 +153,6 @@ InfoSection:CreateLabel({
 })
 
 -- ── MISC TAB ─────────────────────────────────────────────
-local InteresSection = SettingsTab:CreateSection({ Name = "Interesting" })
-local AboutSection = SettingsTab:CreateSection({ Name = "ABOUT" })
 
 local execBox = InteresSection:CreateTextBox({
 	Name = "Print Message",
@@ -153,6 +170,7 @@ local ColorPicker = InteresSection:CreateColorPicker({
 	Default = Color3.fromRGB(255, 255, 255),
 	Callback = function(color)
 		print(color)
+		Window:SetTheme("Accent", color)
 	end,
 })
 
@@ -181,9 +199,15 @@ AboutSection:CreateLabel({
 -- ─────────────────────────────────────────────────────────
 
 -- Read values at any time:
-print(Toggle:Get()) -- true / false
-print(Slider:Get()) -- number
-print(Textbox:Get()) -- string
-print(Dropdown:Get()) -- string
-print(MultiDropdown:Get()) -- table of strings
-print(ColorPicker:Get())
+print(Toggle:Get()) -- Print if it is true or false
+print(Slider:Get()) -- Print the number selected
+print(Textbox:Get()) -- Print what text say
+print(Dropdown:Get()) -- Print what value is selected
+print(MultiDropdown:Get()) -- Print what value is selected
+print(ColorPicker:Get()) -- Print what color is chose
+
+Toggle:Set(false) -- Set the value
+Slider:Set(0) -- Set the number
+Textbox:Set("Hello") -- Set the text
+Dropdown:Set("One") -- Set the value
+ColorPicker:Set(Color3.fromRGB(255, 255, 255)) -- Set the color
